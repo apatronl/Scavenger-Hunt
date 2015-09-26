@@ -42,13 +42,6 @@ class ItemDetailViewController: UIViewController, UIImagePickerControllerDelegat
         presentViewController(imagePicker, animated: true, completion: nil)
     }
     
-//    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-//        let photo = info[UIImagePickerControllerOriginalImage] as! UIImage
-//        itemImageView.image = photo
-//        currentItem!.photo = photo
-//        self.dismissViewControllerAnimated(true, completion: nil)
-//    }
-    
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let theSourceViewController = sourceViewController, theChosenPath = selectedPath {
             let photo = info[UIImagePickerControllerOriginalImage] as! UIImage
