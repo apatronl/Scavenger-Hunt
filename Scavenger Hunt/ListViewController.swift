@@ -9,9 +9,16 @@
 import Foundation
 import UIKit
 
-class ListViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ListViewController: UITableViewController, UINavigationControllerDelegate {
 
     let myManager = ItemsManager()
+    var itemNameToPass: String!
+    var itemPhotoToPass: UIImage?
+    
+//    override func viewWillAppear(animated: Bool) {
+//        self.tableView.reloadData()
+//        myManager.save()
+//    }
     
     @IBAction func unwindToList(segue: UIStoryboardSegue) {
         if segue.identifier == "DoneItem" {
@@ -47,26 +54,29 @@ class ListViewController: UITableViewController, UIImagePickerControllerDelegate
         return cell
         
     }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let imagePicker = UIImagePickerController()
-        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-            imagePicker.sourceType = .Camera
-        } else {
-            imagePicker.sourceType = .PhotoLibrary
-        }
-        imagePicker.delegate = self
-        presentViewController(imagePicker, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        if let indexPath = tableView.indexPathForSelectedRow {
-            let selectedItem = myManager.items[indexPath.row]
-            let photo = info[UIImagePickerControllerOriginalImage] as! UIImage
-            selectedItem.photo = photo
-            myManager.save()
-            dismissViewControllerAnimated(true, completion: { () -> Void in self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-            })
+        
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "DetailView" {
+//            let destinationVC = segue.destinationViewController as! ItemDetailViewController
+//            if let selectedItem = sender as? UITableViewCell {
+//                let indexPath = tableView.indexPathForCell(selectedItem)
+//                let item = myManager.items[indexPath!.row]
+//                itemNameToPass = item.name
+//                itemPhotoToPass = item.photo
+//                destinationVC.itemNameStr = itemNameToPass
+//                destinationVC.itemImage = itemPhotoToPass
+//                destinationVC.currentItem = item // CHECK
+//            }
+//        }
+//    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "DetailView" {
+            if let selectedItem = sender as? UITableViewCell {
+                let indexPath = tableView.indexPathForCell(selectedItem)
+                let destinationVC = segue.destinationViewController as! ItemDetailViewController
+                destinationVC.sourceViewController = self
+                destinationVC.selectedPath = indexPath
+            }
         }
     }
 }

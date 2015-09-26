@@ -51,7 +51,7 @@
             </objects>
             <point key="canvasLocation" x="980" y="379"/>
         </scene>
-        <!--To Find-->
+        <!--Find this 🔜-->
         <scene sceneID="LuF-0h-vBR">
             <objects>
                 <tableViewController id="f2I-q1-Sz3" customClass="ListViewController" customModule="Scavenger_Hunt" customModuleProvider="target" sceneMemberID="viewController">
@@ -76,6 +76,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="QgH-hJ-k4Y" kind="show" identifier="DetailView" id="A4A-BG-h2C"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -84,7 +87,8 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="To Find" id="Jep-9J-KEC">
+                    <navigationItem key="navigationItem" title="Find this 🔜" id="Jep-9J-KEC">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="WYP-bm-EPf"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1Zu-0w-081">
                             <connections>
                                 <segue destination="NR5-5z-Z6D" kind="presentation" id="Tws-is-viL"/>
@@ -96,6 +100,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhE-tS-Ocl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="980" y="-433"/>
+        </scene>
+        <!--Item Detail View Controller-->
+        <scene sceneID="mzy-ez-23Z">
+            <objects>
+                <viewController id="QgH-hJ-k4Y" customClass="ItemDetailViewController" customModule="Scavenger_Hunt" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pvT-31-kNS"/>
+                        <viewControllerLayoutGuide type="bottom" id="Wt9-KC-wzb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UIv-RN-0G6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yHd-1j-dNu">
+                                <rect key="frame" x="180" y="236" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="QaQ-aT-iz6"/>
+                                </constraints>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xx6-YZ-JcB">
+                                <rect key="frame" x="0.0" y="512" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Mark as found" id="wGc-j2-Scb">
+                                        <connections>
+                                            <action selector="itemFound:" destination="QgH-hJ-k4Y" id="rwc-fr-SeL"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tTM-UK-Rvp">
+                                <rect key="frame" x="273" y="137" width="54" height="26"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Wt9-KC-wzb" firstAttribute="top" secondItem="xx6-YZ-JcB" secondAttribute="bottom" id="4D6-AZ-Ykc"/>
+                            <constraint firstItem="tTM-UK-Rvp" firstAttribute="centerY" secondItem="UIv-RN-0G6" secondAttribute="centerY" constant="-150" id="7uj-al-1WC"/>
+                            <constraint firstItem="tTM-UK-Rvp" firstAttribute="centerX" secondItem="UIv-RN-0G6" secondAttribute="centerX" id="D5d-PP-U3T"/>
+                            <constraint firstItem="yHd-1j-dNu" firstAttribute="top" secondItem="pvT-31-kNS" secondAttribute="bottom" constant="172" id="Pgm-0X-Zvl"/>
+                            <constraint firstItem="xx6-YZ-JcB" firstAttribute="leading" secondItem="UIv-RN-0G6" secondAttribute="leading" id="Wal-Cg-95J"/>
+                            <constraint firstItem="Wt9-KC-wzb" firstAttribute="top" secondItem="yHd-1j-dNu" secondAttribute="bottom" constant="192" id="YFy-y0-ei7"/>
+                            <constraint firstItem="xx6-YZ-JcB" firstAttribute="centerX" secondItem="yHd-1j-dNu" secondAttribute="centerX" id="xCO-3y-29u"/>
+                            <constraint firstItem="yHd-1j-dNu" firstAttribute="centerX" secondItem="UIv-RN-0G6" secondAttribute="centerX" id="xq4-PV-Toh"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="9kf-ns-1Wg">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="SRS-rm-soH"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="itemImageView" destination="yHd-1j-dNu" id="987-pr-dAv"/>
+                        <outlet property="itemNameLabel" destination="tTM-UK-Rvp" id="b9Z-oB-e5U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eIL-Nj-b7l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1758" y="-433"/>
         </scene>
         <!--List Nav Controller-->
         <scene sceneID="emF-qO-cJn">
